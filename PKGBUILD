@@ -26,7 +26,8 @@ source=(https://releases.llvm.org/$pkgver/llvm-$pkgver.src.tar.xz{,.sig}
         0000-disable-llvm-symbolizer-test.patch
         0001-GCC-compatibility-Ignore-the-fno-plt-flag.patch
         0002-Enable-SSP-and-PIE-by-default.patch
-        0003-disable-ArrayRefTest.InitializerList.patch)
+        0003-disable-ArrayRefTest.InitializerList.patch
+        0004-fix-lambda-parameter-name-redeclared.patch)
 sha256sums=('1fd90354b9cf19232e8f168faf2220e79be555df3aa743242700879e8fd329ee'
             'SKIP'
             'e6c4cebb96dee827fa0470af313dff265af391cb6da8d429842ef208c8f25e63'
@@ -34,7 +35,8 @@ sha256sums=('1fd90354b9cf19232e8f168faf2220e79be555df3aa743242700879e8fd329ee'
             '6fff47ab5ede79d45fe64bb4903b7dfc27212a38e6cd5d01e60ebd24b7557359'
             'd26239d03983fab1f34970b94d727379ca0be689f5826e50503c4d2f314f207a'
             '010d2e2f2a7d1a8aa027ebb912722910069d74ae815f697bc7efc0f3b5d8dbea'
-            '1ef713d5283d8b0b2bb4544462f5d3614e9c74c602da4bec74deefd6d9c4d3b2')
+            '1ef713d5283d8b0b2bb4544462f5d3614e9c74c602da4bec74deefd6d9c4d3b2'
+            'f7801e06b9e9e25e7ce0506f1803322ba17bd4852829646c5e96e8058e4f7213')
 validpgpkeys=('11E521D646982372EB577A1F8F0871F202119294')
 
 prepare() {
@@ -55,6 +57,8 @@ prepare() {
   # https://aur.archlinux.org/pkgbase/llvm39/
   patch -Np1 -i ../0003-disable-ArrayRefTest.InitializerList.patch
 
+  # Fix lambda parameter redeclaration bugs
+  patch -Np1 -i ../0004-fix-lambda-parameter-name-redeclared.patch
 }
 
 build() {
